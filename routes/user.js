@@ -1,4 +1,5 @@
 const User = require("../models/user");
+
 const { Router } = require("express");
 
 const router = Router();
@@ -15,7 +16,7 @@ router.post("/signin", async (req, res) => {
   const { email, password } = req.body;
   try {
     const token = await User.matchPasswordAndGenerateToken(email, password);
-    return res.cookie("token", token).redirect("/");
+    return res.cookie("token", token).redirect("home");
   } catch (error) {
     res.render("signin", { error: "Incorrect Username or Password" });
   }
